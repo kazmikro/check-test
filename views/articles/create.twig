@@ -1,0 +1,41 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+    Check24 test project - create article
+{% endblock %}
+
+{% block content %}
+
+    {% if errors.create_error %}
+        <div class="alert alert-warning" role="alert">
+            {{ errors.create_error|escape }}
+        </div>
+    {% endif %}
+
+    <form action="/articles/create" method="post">
+        <div class="mb-3">
+            <label for="titleControl" class="form-label">Title</label>
+            <input type="text" name="title" class="form-control {% if errors.title %}is-invalid{% endif %}"
+                   id="titleControl"
+                   placeholder="My awesome article 🤗" required>
+            <div class="invalid-feedback">
+                {% for errorMessage in errors.title %}
+                    {{ errorMessage|escape }} <br>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="textControl" class="form-label">Text</label>
+            <textarea name="text" class="form-control {% if errors.text %}is-invalid{% endif %}" id="textControl"
+                      rows="15" placeholder="Type the text right here 🫣"
+                      required></textarea>
+            <div class="invalid-feedback">
+                {% for errorMessage in errors.text %}
+                    {{ errorMessage|escape }} <br>
+                {% endfor %}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+    Check24 test project - articles
+{% endblock %}
+
+{% block content %}
+    {% if articles is not empty %}
+        {% for article in articles %}
+            <div class="bg-light p-5 rounded">
+                <h3>{{ article.title|escape }}</h3>
+                <p class="lead">
+                    {{ article.text|length > 1000 ? article.text|escape|slice(0, 1000) ~ ' ...' : article.text|escape }}
+                </p>
+                <p>
+                    <span class="small">Author: <a
+                                href="/?author_id={{ article.userId }}">{{ article.userName|escape }}</a> -
+                        <a href="mailto:{{ article.userEmail|escape }}">{{ article.userEmail|escape }}</a>, posted at: {{ article.created_at|date("d.m.Y H:i") }}</span>
+                </p>
+                <a class="btn btn-sm btn-primary" href="/article/?id={{ article.id }}" role="button">View</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>There are no articles yet 🥹</p>
+    {% endif %}
+{% endblock %}

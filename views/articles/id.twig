@@ -1,0 +1,17 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+    Check24 test project - {{ article.title }}
+{% endblock %}
+
+{% block content %}
+    <main class="flex-shrink-0">
+        <div class="container">
+            <h1 class="mt-5">{{ article.title|escape }}</h1>
+            <p><span class="small">Author: {{ article.userName|escape }} - {{ article.userEmail|escape }}</span></p>
+            <p class="lead">{{ article.text|escape }}</p>
+            <p><span class="small">{{ article.created_at|date("d.m.Y H:i") }}</span></p>
+            <p>Back to <a href="/">the main page</a></p>
+        </div>
+    </main>
+{% endblock %}

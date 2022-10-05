@@ -1,0 +1,38 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+    Check24 test project - login
+{% endblock %}
+
+{% block content %}
+
+    {% if errors.login %}
+        <div class="alert alert-warning" role="alert">
+            Incorrect Email or password.
+        </div>
+    {% endif %}
+
+    <form method="post" action="/login">
+        <div class="mb-3">
+            <label for="inputEmail" class="form-label">Email address</label>
+            <input type="email" name="email" class="form-control {% if errors.email %}is-invalid{% endif %}"
+                   id="inputEmail" required>
+            <div class="invalid-feedback">
+                {% for errorMessage in errors.email %}
+                    {{ errorMessage|escape }}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="inputPassword" class="form-label">Password</label>
+            <input type="password" name="password" min="6"
+                   class="form-control {% if errors.password %}is-invalid{% endif %}" id="inputPassword" required>
+            <div class="invalid-feedback">
+                {% for errorMessage in errors.password %}
+                    {{ errorMessage|escape }} <br>
+                {% endfor %}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
